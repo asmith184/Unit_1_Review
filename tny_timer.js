@@ -6,16 +6,31 @@
    Review Assignment
 
    Event Timer
-   Author: 
-   Date:   
+   Author: Aspen Smith
+   Date: 1-10-2020  
 
 */
 
+showClock();
+setInterval("showClock()", 1000);
+
 function showClock(){
-   var thisDay = new Date("May 19, 2018 9:31:27 a.m.");
+   var thisDay = new Date();
    var localDate = thisDay.toLocaleDateString();
    var localTime = thisDay.toLocaleTimeString();
-   document.getElementById("currentTime").innerHTML = "<span>date</span><span>time</span>";
+   document.getElementById("currentTime").innerHTML = "<span>"+localDate+"</span><span>"+localTime+"</span>";
+   var j4Date = nextJuly4(thisDay);
+   j4Date.setHours("21");
+
+   var days = (j4Date - thisDay) /(1000*60*60*24);
+   var hrs = (days - Math.floor(days))*24;
+   var mins = (hrs - Math.floor(hrs))*60;
+   var secs = (mins - Math.floor(mins))*60;
+
+   document.getElementById("dLeft").textContent = Math.floor(days);
+   document.getElementById("hLeft").textContent = Math.floor(hrs);
+   document.getElementById("mLeft").textContent = Math.floor(mins);
+   document.getElementById("sLeft").textContent = Math.floor(secs);
 }
 
 function nextJuly4(currentDate) {
@@ -26,9 +41,4 @@ function nextJuly4(currentDate) {
    return jDate;
 }
 
-var j4Date = nextJuly4(thisDay);
-j4Date.setHours("21:00:00");
 
-var days = thisDay.getDate("4");
-var hrs = thisDay.getHrs("0");
-var mins = thisDay.getMins("0");
